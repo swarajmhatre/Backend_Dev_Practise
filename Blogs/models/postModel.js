@@ -19,7 +19,7 @@ const postSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId, //nested models mein id use karte
         ref: "Comment",
     }]
-});
+}); 
 
 // export
-module.exports = mongoose.model("Post", likeSchema);
+module.exports = mongoose.model("Post", postSchema);

@@ -15,15 +15,15 @@ const todoRoutes = require('./routes/blogs')
 // mount API routes
 app.use('/api/v1', todoRoutes);
 
-// start server
-app.listen(PORT, ()=>{
-    console.log(`App is started at ${Port}`);
-})
 
 // connect to DB
 const dbConnect = require('./config/database');
 dbConnect();
 
+// start server
+app.listen(PORT, ()=>{
+    console.log(`App is started at ${PORT}`);
+})
 // defaultRoute
 app.get('/', (req, res)=>{
     res.send('<h1>This is home page<h1>')

@@ -1,27 +1,34 @@
-// import the model
-const dbConnect = require('../config/database');
-const blogs = require("../models/blogs");
+const Post = require('../models/postModel');
 
-exports.createBlog = async(req, res)=>{
+exports.createPost = async(req, res)=>{
     try{
-        // extract title and content from request
-        const {title, content, likesCount, comments} = req.body;
-
-        const response = await blogs.create({title, content, likesCount, comments});
-
-        res.status(200).json({
-            success : true,
-            data: response,
-            message : 'Entry Created Successfully'
+        const {title, body} = req.body;
+        const post = new Post({
+            title, body,
+        });
+        const savedPost = await post.save();
+        res.json({
+            post: savedPost,
         })
     }
-    catch(err){
-        console.error(err);
-        console.log(err);
-        res.status(100).json({
-            success: false,
-            data: 'Internal Server Error',
-            message : err.message,
+    catch(error){
+        return res.status(400).json({
+            error: "Error while creating Post",
+        })
+    }
+}
+
+// need some more testing after completing the likes controller
+exports.getAllPosts = async (req, res)=>{
+    try{
+        const posts = await Post.find().populate("likes").populate('comments').exec();
+        res.send({
+            posts,
+        })
+    }
+    catch(error){
+        return res.status(400).json({
+            error: "Error while fetching all posts.",
         })
     }
 }
