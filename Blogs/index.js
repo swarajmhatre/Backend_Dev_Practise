@@ -10,10 +10,10 @@ const PORT = process.env.PORT || 8090;
 app.use(express.json());
 
 // import routes from API
-const todoRoutes = require('./routes/blogs')
+const blog = require('./routes/blogs')
 
 // mount API routes
-app.use('/api/v1', todoRoutes);
+app.use('/api/v1', blog);
 
 
 // connect to DB

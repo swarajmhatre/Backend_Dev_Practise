@@ -17,7 +17,7 @@ exports.likePost = async(req,res)=>{
 
         res.json({
             post: updatedPost,
-        })
+        });
     }
     catch(error){
         return res.status(400).json({
@@ -44,7 +44,7 @@ exports.unlikePost = async (req, res)=>{
     }
     catch(error){
         return res.status(400).json({
-            error: "Error while Uniking post",
+            error: "Error while Unliking post",
         })
     }
 }
